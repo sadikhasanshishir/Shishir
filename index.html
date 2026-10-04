@@ -20,10 +20,10 @@
             theme: {
                 extend: {
                     colors: { 
-                        primary: '#6366f1', // Indigo/Purple theme matching the reference video
+                        primary: '#6366f1', 
                         secondary: '#a855f7',
-                        dark: '#030014', // Deep dark blue/black background
-                        cardBg: '#111029', // Dark card background
+                        dark: '#030014', 
+                        cardBg: '#111029', 
                     },
                     fontFamily: { 
                         sans: ['Inter', 'sans-serif'],
@@ -40,17 +40,18 @@
         
         /* Glassmorphism Classes */
         .glass-nav { background: rgba(3, 0, 20, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .glass-card { background: #111029; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; transition: all 0.3s ease; }
-        .glass-card:hover { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1); transform: translateY(-3px); }
+        .glass-card { background: #111029; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-card:hover { border-color: rgba(99, 102, 241, 0.5); box-shadow: 0 15px 50px rgba(99, 102, 241, 0.2); transform: translateY(-8px) scale(1.01); z-index: 20; }
         
         /* Gradient Text */
         .text-gradient { background: linear-gradient(to right, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         /* Badges */
-        .badge { background: rgba(99, 102, 241, 0.1); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 9999px; padding: 4px 12px; font-size: 0.75rem; font-weight: 500; display: inline-block; }
+        .badge { background: rgba(99, 102, 241, 0.1); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 9999px; padding: 4px 12px; font-size: 0.75rem; font-weight: 500; display: inline-block; transition: all 0.3s; }
+        .glass-card:hover .badge { background: rgba(99, 102, 241, 0.2); transform: scale(1.05); }
 
         /* Timeline Line */
-        .timeline-line::before { content: ''; position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.1); z-index: 0; }
+        .timeline-line::before { content: ''; position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #6366f1, #a855f7, transparent); z-index: 0; }
         @media (min-width: 768px) {
             .timeline-line::before { left: 50%; transform: translateX(-50%); }
         }
@@ -58,15 +59,28 @@
         /* Certificate Grid */
         .cert-card { height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
         
-        /* Animations */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* High Animations */
+        .reveal { opacity: 0; transform: translateY(40px) scale(0.95); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
         
+        @keyframes float { 
+            0% { transform: translateY(0px) rotate(0deg); } 
+            50% { transform: translateY(-20px) rotate(2deg); } 
+            100% { transform: translateY(0px) rotate(0deg); } 
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(99,102,241,0.5); }
+            50% { box-shadow: 0 0 30px rgba(168,85,247,0.8); }
+        }
+        .btn-glow { animation: pulse-glow 3s infinite; }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #030014; }
         ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
+        ::-webkit-scrollbar-thumb:hover { background: #a855f7; }
     </style>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white">
@@ -75,23 +89,23 @@
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <a href="#" class="text-2xl font-bold font-heading flex items-center gap-2">
+                <a href="#" class="text-2xl font-bold font-heading flex items-center gap-2 hover:scale-105 transition-transform">
                     <span class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white text-sm">S</span>
                     Shishir<span class="text-primary">.</span>
                 </a>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-6 text-sm font-medium">
-                        <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
-                        <a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a>
-                        <a href="#skills" class="text-gray-300 hover:text-white transition-colors">Skills</a>
-                        <a href="#experience" class="text-gray-300 hover:text-white transition-colors">Experience</a>
-                        <a href="#education" class="text-gray-300 hover:text-white transition-colors">Education</a>
-                        <a href="#certificates" class="text-gray-300 hover:text-white transition-colors">Certificates</a>
-                        <a href="#projects" class="text-gray-300 hover:text-white transition-colors">Projects</a>
+                        <a href="#home" class="text-gray-300 hover:text-white hover:text-primary transition-colors">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-white hover:text-primary transition-colors">About</a>
+                        <a href="#skills" class="text-gray-300 hover:text-white hover:text-primary transition-colors">Skills</a>
+                        <a href="#experience" class="text-gray-300 hover:text-white hover:text-primary transition-colors">Experience</a>
+                        <a href="#education" class="text-gray-300 hover:text-white hover:text-primary transition-colors">Education</a>
+                        <a href="#certificates" class="text-gray-300 hover:text-white hover:text-primary transition-colors">Certificates</a>
+                        <a href="#projects" class="text-gray-300 hover:text-white hover:text-primary transition-colors">Projects</a>
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <a href="#contact" class="bg-primary hover:bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-medium transition-colors shadow-[0_0_15px_rgba(99,102,241,0.5)]">Let's Talk</a>
+                    <a href="#contact" class="bg-primary hover:bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-medium transition-all btn-glow hover:scale-105 inline-block">Let's Talk</a>
                 </div>
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
@@ -110,7 +124,7 @@
                 <a href="#education" class="block px-3 py-2 text-gray-300 hover:text-white">Education</a>
                 <a href="#certificates" class="block px-3 py-2 text-gray-300 hover:text-white">Certificates</a>
                 <a href="#projects" class="block px-3 py-2 text-gray-300 hover:text-white">Projects</a>
-                <a href="#contact" class="inline-block mt-4 bg-primary text-white px-6 py-2 rounded-full text-sm">Let's Talk</a>
+                <a href="#contact" class="inline-block mt-4 bg-primary text-white px-6 py-2 rounded-full text-sm btn-glow">Let's Talk</a>
             </div>
         </div>
     </nav>
@@ -118,25 +132,25 @@
     <!-- Hero Section -->
     <section id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden">
         <!-- Background glows -->
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-blob"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-blob animation-delay-2000"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 flex flex-col-reverse md:flex-row items-center gap-12">
             <div class="md:w-[55%] text-left reveal">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="badge"><i class="fas fa-sparkles mr-1"></i> Welcome to my digital space</span>
+                <div class="flex items-center gap-3 mb-6 hover:translate-x-2 transition-transform">
+                    <span class="badge"><i class="fas fa-sparkles mr-1 animate-pulse"></i> Welcome to my digital space</span>
                 </div>
                 <h1 class="text-5xl md:text-7xl font-bold font-heading mb-2 leading-tight">
-                    Hi, I'm <br/><span class="text-gradient">Shishir.</span>
+                    Hi, I'm <br/><span class="text-gradient hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all">Shishir.</span>
                 </h1>
                 <p class="text-xl text-gray-300 font-medium mb-6 mt-4">
                     MD. SADIK HASAN SHISHIR
                 </p>
                 
                 <div class="flex gap-4 mb-8 text-gray-400">
-                    <a href="https://facebook.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://github.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://facebook.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white hover:scale-110 hover:rotate-12 transition-all"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://github.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white hover:scale-110 hover:-rotate-12 transition-all"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white hover:scale-110 hover:rotate-12 transition-all"><i class="fab fa-linkedin-in"></i></a>
                 </div>
 
                 <h2 class="text-2xl font-bold font-heading mb-4">Civil Engineer • Developer • Tech Enthusiast</h2>
@@ -145,21 +159,21 @@
                 </p>
                 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#projects" class="bg-transparent border border-gray-600 text-white px-8 py-3 rounded-md font-medium hover:bg-gray-800 transition-all text-sm">Explore My Work</a>
-                    <a href="#" class="bg-white text-black px-8 py-3 rounded-md font-medium hover:bg-gray-200 transition-all text-sm">Download Resume</a>
+                    <a href="#projects" class="bg-transparent border border-gray-600 text-white px-8 py-3 rounded-md font-medium hover:bg-primary hover:border-primary hover:-translate-y-1 hover:shadow-lg transition-all text-sm">Explore My Work</a>
+                    <a href="#" class="bg-white text-black px-8 py-3 rounded-md font-medium hover:bg-gray-200 hover:-translate-y-1 hover:shadow-lg transition-all text-sm">Download Resume</a>
                 </div>
             </div>
             
             <div class="md:w-[45%] flex justify-center md:justify-end reveal relative">
                 <!-- Profile Image Frame -->
-                <div class="relative w-72 md:w-96 rounded-[2rem] overflow-hidden border border-gray-800 p-2 bg-[#0c0a1f]">
-                    <div class="absolute top-4 left-4 z-10 text-center">
-                        <span class="block font-bold text-lg leading-none">UAP</span>
-                        <span class="text-[0.6rem] text-gray-400 uppercase tracking-wider">Civil Engineering</span>
+                <div class="relative w-72 md:w-96 rounded-[2rem] overflow-hidden border border-gray-800 p-2 bg-[#0c0a1f] floating">
+                    <div class="absolute top-4 left-4 z-10 text-center bg-black/40 backdrop-blur-sm p-2 rounded-lg">
+                        <span class="block font-bold text-lg leading-none text-white">UAP</span>
+                        <span class="text-[0.6rem] text-primary uppercase tracking-wider font-bold">Civil Engineering</span>
                     </div>
-                    <img src="https://drive.google.com/thumbnail?id=1i8QqoyqbHSYX1NBz9ZdF4kaUN8ZX_Ag8&sz=w800" alt="Md Sadik Hasan Shishir" class="w-full h-auto rounded-3xl object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500">
+                    <img src="https://drive.google.com/thumbnail?id=1i8QqoyqbHSYX1NBz9ZdF4kaUN8ZX_Ag8&sz=w800" alt="Md Sadik Hasan Shishir" class="w-full h-auto rounded-3xl object-cover grayscale-[20%] hover:grayscale-0 hover:scale-105 transition-all duration-700">
                     
-                    <div class="absolute bottom-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-gray-700 rounded-full px-4 py-2 flex items-center gap-2">
+                    <div class="absolute bottom-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-gray-700 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-primary/20 transition-colors">
                         <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                         <span class="text-xs font-medium text-gray-200">Open to Opportunities</span>
                     </div>
@@ -171,52 +185,32 @@
     <!-- About Section -->
     <section id="about" class="py-24 relative z-10 border-t border-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">About Me</div>
-            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-16 reveal text-center max-w-3xl mx-auto">
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal hover:tracking-[0.2em] transition-all cursor-default">About Me</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-16 reveal text-center max-w-3xl mx-auto hover:scale-105 transition-transform duration-500">
                 Turning concepts into <span class="text-gradient">practical realities.</span>
             </h2>
             
             <div class="grid md:grid-cols-3 gap-8 reveal">
-                <div class="glass-card p-8">
-                    <h3 class="text-xl font-bold mb-4">Who I Am</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                <div class="glass-card p-8 group">
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors">Who I Am</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4 group-hover:text-gray-300 transition-colors">
                         I am an undergraduate Civil Engineering student at the University of Asia Pacific (UAP), based in Bogura. I have a strong foundation in structural mechanics, AutoCAD, Revit, and advanced land surveying (RTK GPS).
                     </p>
-                    <p class="text-gray-400 text-sm leading-relaxed">
+                    <p class="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">
                         My goal is to become a versatile engineer who can design robust structures and develop reliable digital solutions for the real estate and construction industries.
                     </p>
                 </div>
-                <div class="glass-card p-8">
-                    <h3 class="text-xl font-bold mb-4">What I Do</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                <div class="glass-card p-8 group">
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-secondary transition-colors">What I Do</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4 group-hover:text-gray-300 transition-colors">
                         Beyond traditional engineering, I actively engage in real estate marketing and land development (e.g., Paikar City, Brigadier Housing Complex). I also build professional web portals using WordPress and utilize Python for engineering analysis.
                     </p>
                 </div>
-                <div class="glass-card p-8">
-                    <h3 class="text-xl font-bold mb-4">What I Enjoy</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
+                <div class="glass-card p-8 group">
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors">What I Enjoy</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">
                         I enjoy learning new technologies, operating drones for aerial site mapping (DJI), exploring AI for development, and blending my technical engineering knowledge with modern web and software development tools.
                     </p>
-                </div>
-            </div>
-
-            <!-- Quick Stats/Tags -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 reveal">
-                <div class="glass-card p-6 text-center border-t border-t-primary/30">
-                    <div class="font-bold text-xl mb-1">UAP</div>
-                    <div class="text-xs text-gray-500 uppercase">Current Study</div>
-                </div>
-                <div class="glass-card p-6 text-center border-t border-t-secondary/30">
-                    <div class="font-bold text-xl mb-1">CE</div>
-                    <div class="text-xs text-gray-500 uppercase">Major</div>
-                </div>
-                <div class="glass-card p-6 text-center border-t border-t-primary/30">
-                    <div class="font-bold text-xl mb-1">Web Dev</div>
-                    <div class="text-xs text-gray-500 uppercase">Tech Focus</div>
-                </div>
-                <div class="glass-card p-6 text-center border-t border-t-secondary/30">
-                    <div class="font-bold text-xl mb-1">∞</div>
-                    <div class="text-xs text-gray-500 uppercase">Learning Mindset</div>
                 </div>
             </div>
         </div>
@@ -225,8 +219,8 @@
     <!-- Skills Section -->
     <section id="skills" class="py-24 relative z-10 border-t border-gray-900 bg-[#050314]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">My Skills</div>
-            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 reveal text-center max-w-3xl mx-auto">
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal hover:tracking-[0.2em] transition-all cursor-default">My Skills</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 reveal text-center max-w-3xl mx-auto hover:scale-105 transition-transform duration-500">
                 Skills that help me <span class="text-gradient">build.</span>
             </h2>
             <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto reveal">
@@ -235,64 +229,34 @@
 
             <div class="grid md:grid-cols-2 gap-6 reveal">
                 <!-- Engineering Design -->
-                <div class="glass-card p-8">
+                <div class="glass-card p-8 group">
                     <div class="flex justify-between items-start mb-6">
-                        <span class="text-4xl font-bold text-gray-800">01</span>
+                        <span class="text-4xl font-bold text-gray-800 group-hover:text-primary/50 transition-colors">01</span>
                         <span class="badge">Engineering</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Civil & Architectural Design</h3>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Civil & Architectural Design</h3>
                     <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Drafting site plans, 3D modeling, and structural layouts.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">AutoCAD 2D/3D</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Revit (BIM)</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">SketchUp</span>
-                    </div>
-                </div>
-
-                <!-- Surveying & Field -->
-                <div class="glass-card p-8">
-                    <div class="flex justify-between items-start mb-6">
-                        <span class="text-4xl font-bold text-gray-800">02</span>
-                        <span class="badge">Field Work</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Surveying & Mapping</h3>
-                    <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Advanced land measurement and aerial site visualization.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">RTK GPS</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Total Station</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Drone Mapping (DJI)</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded hover:bg-primary hover:text-white transition-colors cursor-default">AutoCAD 2D/3D</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded hover:bg-primary hover:text-white transition-colors cursor-default">Revit (BIM)</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded hover:bg-primary hover:text-white transition-colors cursor-default">SketchUp</span>
                     </div>
                 </div>
 
                 <!-- Web Development -->
-                <div class="glass-card p-8">
+                <div class="glass-card p-8 group">
                     <div class="flex justify-between items-start mb-6">
-                        <span class="text-4xl font-bold text-gray-800">03</span>
+                        <span class="text-4xl font-bold text-gray-800 group-hover:text-secondary/50 transition-colors">02</span>
                         <span class="badge">Web</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Web & Software Dev</h3>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-secondary transition-colors">Web & Software Dev</h3>
                     <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Building business portals, custom websites, and analytical tools.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">HTML/CSS</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Tailwind</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">WordPress</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Python (Django)</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Flutter</span>
-                    </div>
-                </div>
-
-                <!-- Media & Tools -->
-                <div class="glass-card p-8">
-                    <div class="flex justify-between items-start mb-6">
-                        <span class="text-4xl font-bold text-gray-800">04</span>
-                        <span class="badge">Tools</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Media & Analysis Tools</h3>
-                    <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Video editing, graphic design, and data management.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">DaVinci Resolve</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Adobe Illustrator</span>
-                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Advanced MS Excel</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded hover:bg-secondary hover:text-white transition-colors cursor-default">HTML/CSS</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded hover:bg-secondary hover:text-white transition-colors cursor-default">Tailwind</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded hover:bg-secondary hover:text-white transition-colors cursor-default">WordPress</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded hover:bg-secondary hover:text-white transition-colors cursor-default">Python (Django)</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded hover:bg-secondary hover:text-white transition-colors cursor-default">Flutter</span>
                     </div>
                 </div>
             </div>
@@ -302,8 +266,8 @@
     <!-- Experience & Education (Timeline style) -->
     <section id="experience" class="py-24 relative z-10 border-t border-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">Journey</div>
-            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-16 reveal text-center">
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal hover:tracking-[0.2em] transition-all cursor-default">Journey</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-16 reveal text-center hover:scale-105 transition-transform duration-500">
                 My journey of <span class="text-gradient">learning & growth.</span>
             </h2>
 
@@ -313,327 +277,150 @@
                 <!-- Item 1: Real Estate -->
                 <div class="relative z-10 flex flex-col md:flex-row justify-between md:items-center mb-12 reveal w-full md:w-1/2 md:pr-12 md:ml-auto">
                     <!-- Point -->
-                    <div class="absolute left-6 md:left-0 md:-ml-2 top-0 mt-2 w-4 h-4 rounded-full bg-primary ring-4 ring-dark z-20 hidden md:block"></div>
+                    <div class="absolute left-6 md:left-0 md:-ml-2 top-0 mt-2 w-4 h-4 rounded-full bg-primary ring-4 ring-dark z-20 hidden md:block hover:scale-150 hover:bg-white transition-transform cursor-pointer shadow-[0_0_10px_#6366f1]"></div>
                     
-                    <div class="glass-card p-6 w-full ml-12 md:ml-0">
+                    <div class="glass-card p-6 w-full ml-12 md:ml-0 group hover:-translate-x-2">
                         <div class="flex justify-between items-start mb-2">
-                            <span class="badge bg-green-500/10 text-green-400 border-green-500/20">Current Focus</span>
-                            <span class="text-xs text-gray-500">2025 - Present</span>
+                            <span class="badge bg-green-500/10 text-green-400 border-green-500/20 group-hover:bg-green-500/20">Current Focus</span>
+                            <span class="text-xs text-gray-500 group-hover:text-primary transition-colors">2025 - Present</span>
                         </div>
-                        <h3 class="text-lg font-bold">Real Estate Dev & Marketing</h3>
-                        <p class="text-sm text-gray-400 mb-2">Paikar City & Brigadier Housing Complex</p>
-                        <p class="text-sm text-gray-500">Managing project layouts, digital promotional assets, site mapping via drones, and technical marketing strategies in Bogura.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="text-[10px] uppercase tracking-wider text-gray-400 bg-gray-800 px-2 py-1 rounded">AutoCAD</span>
-                            <span class="text-[10px] uppercase tracking-wider text-gray-400 bg-gray-800 px-2 py-1 rounded">Marketing</span>
-                        </div>
+                        <h3 class="text-lg font-bold group-hover:text-white transition-colors">Real Estate Dev & Marketing</h3>
+                        <p class="text-sm text-primary mb-2">Paikar City & Brigadier Housing Complex</p>
+                        <p class="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">Managing project layouts, digital promotional assets, site mapping via drones, and technical marketing strategies in Bogura.</p>
                     </div>
                 </div>
 
                 <!-- Item 2: Web Dev -->
                 <div class="relative z-10 flex flex-col md:flex-row justify-between md:items-center mb-12 reveal w-full md:w-1/2 md:pl-12">
                     <!-- Point -->
-                    <div class="absolute left-6 md:right-0 md:left-auto md:-mr-2 top-0 mt-2 w-4 h-4 rounded-full bg-secondary ring-4 ring-dark z-20 hidden md:block"></div>
+                    <div class="absolute left-6 md:right-0 md:left-auto md:-mr-2 top-0 mt-2 w-4 h-4 rounded-full bg-secondary ring-4 ring-dark z-20 hidden md:block hover:scale-150 hover:bg-white transition-transform cursor-pointer shadow-[0_0_10px_#a855f7]"></div>
                     
-                    <div class="glass-card p-6 w-full ml-12 md:ml-0">
+                    <div class="glass-card p-6 w-full ml-12 md:ml-0 group hover:translate-x-2">
                         <div class="flex justify-between items-start mb-2">
                             <span class="badge">Project Experience</span>
-                            <span class="text-xs text-gray-500">2026</span>
+                            <span class="text-xs text-gray-500 group-hover:text-secondary transition-colors">2026</span>
                         </div>
-                        <h3 class="text-lg font-bold">Web Developer</h3>
-                        <p class="text-sm text-gray-400 mb-2">Guardian Housing & Builders</p>
-                        <p class="text-sm text-gray-500">Designed and deployed a complete business web portal using WordPress, managing hosting, domains, and custom front-end styling.</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="text-[10px] uppercase tracking-wider text-gray-400 bg-gray-800 px-2 py-1 rounded">WordPress</span>
-                            <span class="text-[10px] uppercase tracking-wider text-gray-400 bg-gray-800 px-2 py-1 rounded">Web Design</span>
-                        </div>
+                        <h3 class="text-lg font-bold group-hover:text-white transition-colors">Web Developer</h3>
+                        <p class="text-sm text-secondary mb-2">Guardian Housing & Builders</p>
+                        <p class="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">Designed and deployed a complete business web portal using WordPress, managing hosting, domains, and custom front-end styling.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Education Timeline -->
+            <!-- Education Timeline with Clickable Logos -->
             <div id="education" class="mt-24">
-                <h2 class="text-3xl font-bold font-heading mb-12 reveal text-center">My <span class="text-gradient">academic</span> journey.</h2>
+                <h2 class="text-3xl font-bold font-heading mb-12 reveal text-center hover:scale-105 transition-transform duration-500">My <span class="text-gradient">academic</span> journey.</h2>
                 
-                <div class="space-y-4 reveal max-w-4xl mx-auto">
+                <div class="space-y-6 reveal max-w-4xl mx-auto">
                     <!-- UAP -->
-                    <div class="glass-card p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-l-4 border-l-primary">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center font-bold text-gray-300">UAP</div>
-                            <div>
-                                <h3 class="font-bold text-lg">University of Asia Pacific</h3>
-                                <p class="text-sm text-gray-400">B.Sc. in Civil Engineering</p>
+                    <a href="https://uap-bd.edu/" target="_blank" class="block">
+                        <div class="glass-card p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-l-4 border-l-primary hover:bg-[#1a1736] transition-all hover:pl-8 group cursor-pointer">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-shadow">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/3/30/University_of_Asia_Pacific_%28Bangladesh%29_logo.png" alt="UAP Logo" class="w-full h-full object-contain">
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg group-hover:text-primary transition-colors flex items-center gap-2">
+                                        University of Asia Pacific 
+                                        <i class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity -mt-2"></i>
+                                    </h3>
+                                    <p class="text-sm text-gray-400">B.Sc. in Civil Engineering</p>
+                                </div>
                             </div>
+                            <span class="badge bg-green-500/10 text-green-400 border-green-500/20 group-hover:scale-110">Current</span>
                         </div>
-                        <span class="badge bg-green-500/10 text-green-400 border-green-500/20">Current</span>
-                    </div>
+                    </a>
 
                     <!-- School -->
-                    <div class="glass-card p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center font-bold text-gray-300">BM</div>
-                            <div>
-                                <h3 class="font-bold text-lg">BIAM Model School and College, Bogura</h3>
-                                <p class="text-sm text-gray-400">Primary to Higher Secondary Education</p>
+                    <a href="https://biammodelbogra.edu.bd/" target="_blank" class="block">
+                        <div class="glass-card p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:bg-[#1a1736] transition-all hover:pl-8 group cursor-pointer border-l-4 border-transparent hover:border-l-secondary">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-shadow">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/0/07/BIAM_Model_School_and_College%2C_Bogura_logo.png" alt="BIAM Logo" class="w-full h-full object-contain">
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg group-hover:text-secondary transition-colors flex items-center gap-2">
+                                        BIAM Model School and College, Bogura
+                                        <i class="fas fa-external-link-alt text-xs opacity-0 group-hover:opacity-100 transition-opacity -mt-2"></i>
+                                    </h3>
+                                    <p class="text-sm text-gray-400">Primary to Higher Secondary Education</p>
+                                </div>
                             </div>
+                            <span class="text-xs text-gray-500 font-medium px-3 py-1 bg-gray-800 rounded-full group-hover:bg-gray-700 transition-colors">Completed</span>
                         </div>
-                        <span class="text-xs text-gray-500 font-medium px-3 py-1 bg-gray-800 rounded-full">Completed</span>
-                    </div>
+                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificates Section (Gallery) -->
-    <section id="certificates" class="py-24 relative z-10 border-t border-gray-900 bg-[#050314]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">Certifications</div>
-            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 reveal text-center">
-                Learning that <span class="text-gradient">counts.</span>
-            </h2>
-            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto reveal">
-                A curated collection of certificates from professional learning programs in civil drafting, software development, cybersecurity, and AI.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
-                
-                <!-- Cert 1 -->
-                <div class="glass-card overflow-hidden cert-card group">
-                    <div class="h-48 overflow-hidden bg-gray-800 relative">
-                        <img src="https://drive.google.com/thumbnail?id=1GQ7g4suxYJhsSAv1bMdwOK7lSKIN2Xci&sz=w800" alt="Civil 3D" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-primary mb-2">Autodesk Learning</span>
-                        <h3 class="font-bold text-lg mb-1 leading-tight">Civil 3D 2023 Essentials</h3>
-                        <p class="text-xs text-gray-400 mb-4 flex-1">Complete beginners guide to Civil 3D.</p>
-                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
-                            <span>ID: B499-8705</span>
-                            <span>Oct 2026</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cert 2 -->
-                <div class="glass-card overflow-hidden cert-card group">
-                    <div class="h-48 overflow-hidden bg-gray-800 relative">
-                        <img src="https://drive.google.com/thumbnail?id=1WLet_RrliFL71CcDtVdPdTYfHguPVSNP&sz=w800" alt="Python & Django" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-secondary mb-2">Ostad The Coach</span>
-                        <h3 class="font-bold text-lg mb-1 leading-tight">AI-Powered Full Stack Dev</h3>
-                        <p class="text-xs text-gray-400 mb-4 flex-1">Development with Python & Django.</p>
-                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
-                            <span>ID: C48537</span>
-                            <span>2026</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cert 3 -->
-                <div class="glass-card overflow-hidden cert-card group">
-                    <div class="h-48 overflow-hidden bg-gray-800 relative">
-                        <img src="https://drive.google.com/thumbnail?id=16__Ks0vmnsH9NrB8PIcDYp6MM9mMVXZ2&sz=w800" alt="Cyber Security" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-green-400 mb-2">Ostad The Coach</span>
-                        <h3 class="font-bold text-lg mb-1 leading-tight">Cyber Security & Ethical Hacking</h3>
-                        <p class="text-xs text-gray-400 mb-4 flex-1">Career Starter crash course.</p>
-                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
-                            <span>ID: C48536</span>
-                            <span>2026</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cert 4 -->
-                <div class="glass-card overflow-hidden cert-card group">
-                    <div class="h-48 overflow-hidden bg-gray-800 relative">
-                        <img src="https://drive.google.com/thumbnail?id=1uqCfvJERJNU-LJoigywlDcqrVgVszGp-&sz=w800" alt="Flutter" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 mb-2">Ostad The Coach</span>
-                        <h3 class="font-bold text-lg mb-1 leading-tight">App Dev with Flutter</h3>
-                        <p class="text-xs text-gray-400 mb-4 flex-1">Career Launchpad 2026.</p>
-                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
-                            <span>ID: C48538</span>
-                            <span>2026</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cert 5 -->
-                <div class="glass-card overflow-hidden cert-card group">
-                    <div class="h-48 overflow-hidden bg-gray-800 relative">
-                        <img src="https://drive.google.com/thumbnail?id=1a5DEiiIzAoPuWt7xlggrxUyDscqwPSdT&sz=w800" alt="OPSWAT CIP" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100 object-top">
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-orange-400 mb-2">OPSWAT Academy</span>
-                        <h3 class="font-bold text-lg mb-1 leading-tight">Critical Infrastructure Protection</h3>
-                        <p class="text-xs text-gray-400 mb-4 flex-1">Introduction to CIP program.</p>
-                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
-                            <span>ID: ITDMW3KOAA</span>
-                            <span>Oct 2026</span>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Cert 6 -->
-                 <div class="glass-card overflow-hidden cert-card group">
-                    <div class="h-48 overflow-hidden bg-gray-800 relative flex items-center justify-center">
-                        <img src="https://drive.google.com/thumbnail?id=1lgDco88BcjUZ3HRa96Hzj0uYV9Tmk_4W&sz=w800" alt="AI Basics" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-red-400 mb-2">10 Minute School & Robi</span>
-                        <h3 class="font-bold text-lg mb-1 leading-tight">Basics of Artificial Intelligence</h3>
-                        <p class="text-xs text-gray-400 mb-4 flex-1">Comprehensive AI online course.</p>
-                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
-                            <span>ID: 624a70c86</span>
-                            <span>Completed</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="text-center mt-8 reveal">
-                <p class="text-xs text-gray-500">*Also hold certifications in Adobe Illustrator, Network AI, and Basics of Management.</p>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-24 relative z-10 border-t border-gray-900">
+    <section id="projects" class="py-24 relative z-10 border-t border-gray-900 bg-[#050314]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">Projects</div>
-            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 reveal text-center">
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal hover:tracking-[0.2em] transition-all cursor-default">Projects</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 reveal text-center hover:scale-105 transition-transform duration-500">
                 Things I've <span class="text-gradient">built.</span>
             </h2>
             <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto reveal">
                 A collection of my academic, personal, and professional engineering/web development projects.
             </p>
 
-            <div class="grid md:grid-cols-2 gap-8 reveal">
-                <!-- Project 1 -->
-                <div class="glass-card p-6 relative group">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+                
+                <!-- Project 1: Brigadier -->
+                <div class="glass-card p-6 relative group overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform duration-500"></div>
                     <div class="absolute top-6 right-6 badge bg-gray-800 text-gray-300 border-gray-700">Ongoing</div>
-                    <span class="text-5xl font-bold text-gray-800/50 absolute top-4 right-24 pointer-events-none">01</span>
-                    <h3 class="text-2xl font-bold mb-2">Brigadier Housing Complex</h3>
-                    <p class="text-sm text-gray-400 mb-6">Real estate layout planning, drone site mapping, and digital marketing strategy execution in Bogura.</p>
+                    <h3 class="text-2xl font-bold mb-2 mt-8 group-hover:text-primary transition-colors">Brigadier Housing Complex</h3>
+                    <p class="text-sm text-gray-400 mb-6 min-h-[60px]">Real estate layout planning, drone site mapping, and digital marketing strategy execution in Bogura.</p>
                     <div class="flex flex-wrap gap-2 mb-8">
-                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">AutoCAD</span>
-                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">Drone Mapping</span>
-                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">Site Planning</span>
+                        <span class="text-[10px] uppercase font-bold px-2 py-1 bg-primary/10 text-primary rounded">AutoCAD</span>
+                        <span class="text-[10px] uppercase font-bold px-2 py-1 bg-primary/10 text-primary rounded">Drone Mapping</span>
                     </div>
-                    <a href="#" class="text-sm font-bold flex items-center gap-2 hover:text-primary transition-colors">
-                        View Project Details <i class="fas fa-arrow-right"></i>
-                    </a>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="glass-card p-6 relative group">
-                    <div class="absolute top-6 right-6 badge bg-green-500/10 text-green-400 border-green-500/20"><i class="fas fa-circle text-[8px] mr-1"></i> Live</div>
-                    <span class="text-5xl font-bold text-gray-800/50 absolute top-4 right-24 pointer-events-none">02</span>
-                    <h3 class="text-2xl font-bold mb-2">Guardian Housing Website</h3>
-                    <p class="text-sm text-gray-400 mb-6">A modern business portal developed for Guardian Housing & Builders, presenting residential development projects.</p>
-                    <div class="flex flex-wrap gap-2 mb-8">
-                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">WordPress</span>
-                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">CSS</span>
-                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">Web Design</span>
-                    </div>
-                    <a href="#" class="text-sm font-bold flex items-center gap-2 hover:text-primary transition-colors">
-                        Visit Live Website <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 relative z-10 border-t border-gray-900 bg-[#050314]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">Contact</div>
-            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-16 reveal text-center">
-                Let's <span class="text-gradient">connect.</span>
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto reveal">
-                <!-- Info -->
-                <div class="space-y-8">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2">Get in touch</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Have a project idea, a civil engineering consultation, or simply want to talk about technology? Feel free to get in touch with me.
-                        </p>
-                    </div>
+                <!-- Project 2: Guardian Housing -->
+                <div class="glass-card p-6 relative group overflow-hidden hover:-translate-y-4 transition-all duration-500 border-t border-t-primary/50">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-bl-full -z-10 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="absolute top-6 right-6 badge bg-green-500/20 text-green-400 border-green-500/30 animate-pulse"><i class="fas fa-circle text-[8px] mr-1"></i> Live</div>
                     
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-primary shrink-0">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Email</p>
-                                <a href="mailto:contact.shishir@gmail.com" class="text-sm font-medium hover:text-primary transition-colors">contact.shishir@gmail.com</a>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-primary shrink-0">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Phone</p>
-                                <a href="tel:+8801773215854" class="text-sm font-medium hover:text-primary transition-colors">+88 01773215854</a>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-primary shrink-0">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Location</p>
-                                <p class="text-sm font-medium">Bogura, Bangladesh</p>
-                            </div>
-                        </div>
+                    <h3 class="text-2xl font-bold mb-2 mt-8 group-hover:text-white transition-colors">Guardian Housing</h3>
+                    <p class="text-sm text-gray-400 mb-6 min-h-[60px]">A modern business portal developed for Guardian Housing & Builders, presenting residential projects.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-[10px] uppercase font-bold px-2 py-1 bg-white/10 text-white rounded">WordPress</span>
+                        <span class="text-[10px] uppercase font-bold px-2 py-1 bg-white/10 text-white rounded">Web Design</span>
                     </div>
+                    <a href="https://guardianhousing.bd" target="_blank" class="inline-flex items-center justify-center w-full bg-primary/20 hover:bg-primary text-white text-sm font-bold py-3 rounded-lg transition-all group-hover:shadow-[0_0_20px_rgba(99,102,241,0.5)]">
+                        Visit Live Website <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
                 </div>
 
-                <!-- Form -->
-                <div class="glass-card p-8">
-                    <h3 class="text-xl font-bold mb-6">Send me a message</h3>
-                    <form id="contact-form" class="space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-gray-500 mb-1">Your Name</label>
-                                <input type="text" required class="w-full bg-[#0c0a1f] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-gray-500 mb-1">Your Email</label>
-                                <input type="email" required class="w-full bg-[#0c0a1f] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-1">Subject</label>
-                            <input type="text" required class="w-full bg-[#0c0a1f] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-500 mb-1">Message</label>
-                            <textarea rows="4" required class="w-full bg-[#0c0a1f] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-primary hover:bg-indigo-600 text-white font-medium py-3 rounded-lg transition-colors text-sm mt-2">
-                            Send Message
-                        </button>
-                    </form>
+                <!-- Project 3: Tushar Enterprise -->
+                <div class="glass-card p-6 relative group overflow-hidden hover:-translate-y-4 transition-all duration-500 border-t border-t-secondary/50">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/20 rounded-bl-full -z-10 group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="absolute top-6 right-6 badge bg-green-500/20 text-green-400 border-green-500/30 animate-pulse"><i class="fas fa-circle text-[8px] mr-1"></i> Live</div>
+                    
+                    <h3 class="text-2xl font-bold mb-2 mt-8 group-hover:text-white transition-colors">Tushar Enterprise</h3>
+                    <p class="text-sm text-gray-400 mb-6 min-h-[60px]">A professional business website developed to present company services, information, and online presence.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-[10px] uppercase font-bold px-2 py-1 bg-white/10 text-white rounded">Web Dev</span>
+                        <span class="text-[10px] uppercase font-bold px-2 py-1 bg-white/10 text-white rounded">Responsive</span>
+                    </div>
+                    <a href="https://tusharenterprise.com.bd" target="_blank" class="inline-flex items-center justify-center w-full bg-secondary/20 hover:bg-secondary text-white text-sm font-bold py-3 rounded-lg transition-all group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+                        Visit Live Website <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-gray-900 text-center text-gray-500 text-xs">
-        <div class="flex justify-center gap-4 mb-4">
-            <a href="#" class="hover:text-white transition-colors">Facebook</a>
-            <a href="#" class="hover:text-white transition-colors">GitHub</a>
-            <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+    <footer class="py-12 border-t border-gray-900 text-center text-gray-500 text-sm bg-[#02000a]">
+        <div class="flex justify-center gap-6 mb-6">
+            <a href="#" class="hover:text-primary hover:scale-125 transition-all"><i class="fab fa-facebook-f text-xl"></i></a>
+            <a href="#" class="hover:text-white hover:scale-125 transition-all"><i class="fab fa-github text-xl"></i></a>
+            <a href="#" class="hover:text-secondary hover:scale-125 transition-all"><i class="fab fa-linkedin-in text-xl"></i></a>
         </div>
         <p>&copy; 2026 Md Sadik Hasan Shishir. Built with HTML, Tailwind & JS.</p>
     </footer>
@@ -660,7 +447,6 @@
             // Trigger first reveal immediately
             setTimeout(() => {
                 document.querySelector('#home .reveal').classList.add('active');
-                if(document.querySelector('#home .floating')) document.querySelector('#home .floating').classList.add('active');
             }, 100);
         });
     </script>
