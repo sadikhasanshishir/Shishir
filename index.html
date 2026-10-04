@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Md Sadik Hasan Shishir</title>
+    <title>Md Sadik Hasan Shishir | Portfolio</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,39 +19,54 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { primary: '#3a86ff', dark: '#0f172a', glass: 'rgba(255, 255, 255, 0.05)' },
-                    fontFamily: { sans: ['Poppins', 'sans-serif'] }
+                    colors: { 
+                        primary: '#6366f1', // Indigo/Purple theme matching the reference video
+                        secondary: '#a855f7',
+                        dark: '#030014', // Deep dark blue/black background
+                        cardBg: '#111029', // Dark card background
+                    },
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    }
                 }
             }
         }
     </script>
 
     <style>
-        body { background-color: #0f172a; color: #e2e8f0; font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+        body { background-color: #030014; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Outfit', sans-serif; }
         
         /* Glassmorphism Classes */
-        .glass-nav { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; }
-        .glass-card:hover { transform: translateY(-5px); border-color: rgba(58, 134, 255, 0.4); box-shadow: 0 10px 40px rgba(58, 134, 255, 0.15); }
+        .glass-nav { background: rgba(3, 0, 20, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: #111029; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; transition: all 0.3s ease; }
+        .glass-card:hover { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1); transform: translateY(-3px); }
         
         /* Gradient Text */
-        .text-gradient { background: linear-gradient(to right, #3a86ff, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient { background: linear-gradient(to right, #6366f1, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* Project Image Scroll Effect */
-        .project-img-wrapper { height: 250px; overflow: hidden; position: relative; border-radius: 16px 16px 0 0; }
-        .project-img { width: 100%; transition: transform 3s ease-in-out; }
-        .glass-card:hover .project-img { transform: translateY(calc(-100% + 250px)); }
+        /* Badges */
+        .badge { background: rgba(99, 102, 241, 0.1); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 9999px; padding: 4px 12px; font-size: 0.75rem; font-weight: 500; display: inline-block; }
+
+        /* Timeline Line */
+        .timeline-line::before { content: ''; position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.1); z-index: 0; }
+        @media (min-width: 768px) {
+            .timeline-line::before { left: 50%; transform: translateX(-50%); }
+        }
+
+        /* Certificate Grid */
+        .cert-card { height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
         
         /* Animations */
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
-        .floating { animation: float 4s ease-in-out infinite; }
         
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #3a86ff; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: #030014; }
+        ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
     </style>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white">
@@ -60,15 +75,23 @@
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <a href="#" class="text-2xl font-bold text-gradient">Shishir.</a>
+                <a href="#" class="text-2xl font-bold font-heading flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white text-sm">S</span>
+                    Shishir<span class="text-primary">.</span>
+                </a>
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8 text-sm font-medium">
-                        <a href="#home" class="hover:text-primary transition-colors">Home</a>
-                        <a href="#about" class="hover:text-primary transition-colors">About</a>
-                        <a href="#portfolio" class="hover:text-primary transition-colors">Projects</a>
-                        <a href="#certificates" class="hover:text-primary transition-colors">Certificates</a>
-                        <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                    <div class="ml-10 flex items-baseline space-x-6 text-sm font-medium">
+                        <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a>
+                        <a href="#skills" class="text-gray-300 hover:text-white transition-colors">Skills</a>
+                        <a href="#experience" class="text-gray-300 hover:text-white transition-colors">Experience</a>
+                        <a href="#education" class="text-gray-300 hover:text-white transition-colors">Education</a>
+                        <a href="#certificates" class="text-gray-300 hover:text-white transition-colors">Certificates</a>
+                        <a href="#projects" class="text-gray-300 hover:text-white transition-colors">Projects</a>
                     </div>
+                </div>
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-primary hover:bg-indigo-600 text-white px-6 py-2 rounded-full text-sm font-medium transition-colors shadow-[0_0_15px_rgba(99,102,241,0.5)]">Let's Talk</a>
                 </div>
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
@@ -78,318 +101,550 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass-nav absolute w-full">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
-                <a href="#home" class="block px-3 py-2 hover:text-primary">Home</a>
-                <a href="#about" class="block px-3 py-2 hover:text-primary">About</a>
-                <a href="#portfolio" class="block px-3 py-2 hover:text-primary">Projects</a>
-                <a href="#certificates" class="block px-3 py-2 hover:text-primary">Certificates</a>
-                <a href="#contact" class="block px-3 py-2 hover:text-primary">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden glass-nav absolute w-full border-b border-gray-800">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="#home" class="block px-3 py-2 text-gray-300 hover:text-white">Home</a>
+                <a href="#about" class="block px-3 py-2 text-gray-300 hover:text-white">About</a>
+                <a href="#skills" class="block px-3 py-2 text-gray-300 hover:text-white">Skills</a>
+                <a href="#experience" class="block px-3 py-2 text-gray-300 hover:text-white">Experience</a>
+                <a href="#education" class="block px-3 py-2 text-gray-300 hover:text-white">Education</a>
+                <a href="#certificates" class="block px-3 py-2 text-gray-300 hover:text-white">Certificates</a>
+                <a href="#projects" class="block px-3 py-2 text-gray-300 hover:text-white">Projects</a>
+                <a href="#contact" class="inline-block mt-4 bg-primary text-white px-6 py-2 rounded-full text-sm">Let's Talk</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden">
-        <div class="absolute inset-0 z-0 opacity-20">
-            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-            <div class="absolute top-1/3 right-1/4 w-72 h-72 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 text-center md:text-left reveal">
-                <p class="text-primary font-medium text-lg mb-2">Hello, I am</p>
-                <h1 class="text-4xl md:text-6xl font-bold mb-4" id="hero-name"></h1>
-                <h2 class="text-2xl md:text-3xl text-gray-400 mb-6 h-10"><span id="typing-text" class="text-gradient font-semibold"></span><span class="animate-pulse">|</span></h2>
-                <p class="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0" id="hero-desc"></p>
-                <div class="flex justify-center md:justify-start space-x-4">
-                    <a href="#contact" class="bg-gradient-to-r from-primary to-cyan-500 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:-translate-y-1">Hire Me</a>
-                    <a href="#" class="border border-primary/50 text-white px-8 py-3 rounded-full font-medium hover:bg-primary/10 transition-all">Download CV</a>
+    <section id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden">
+        <!-- Background glows -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 flex flex-col-reverse md:flex-row items-center gap-12">
+            <div class="md:w-[55%] text-left reveal">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="badge"><i class="fas fa-sparkles mr-1"></i> Welcome to my digital space</span>
                 </div>
-                <div class="mt-8 flex justify-center md:justify-start space-x-6 text-xl" id="social-links">
-                    <!-- Social Links injected via JS -->
+                <h1 class="text-5xl md:text-7xl font-bold font-heading mb-2 leading-tight">
+                    Hi, I'm <br/><span class="text-gradient">Shishir.</span>
+                </h1>
+                <p class="text-xl text-gray-300 font-medium mb-6 mt-4">
+                    MD. SADIK HASAN SHISHIR
+                </p>
+                
+                <div class="flex gap-4 mb-8 text-gray-400">
+                    <a href="https://facebook.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://github.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-            </div>
-            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center reveal floating">
-                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full p-2 bg-gradient-to-tr from-primary to-cyan-400">
-                    <img id="profile-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Profile" class="w-full h-full object-cover rounded-full border-4 border-dark">
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- About & Skills Section -->
-    <section id="about" class="py-20 relative z-10 bg-dark/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="text-gradient">Me</span></h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
-            </div>
-            <div class="flex flex-col md:flex-row gap-12 items-center reveal">
-                <div class="md:w-1/2 glass-card p-8">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Introduction</h3>
-                    <p class="text-gray-400 leading-relaxed mb-4" id="about-text"></p>
-                    <div class="mt-6 space-y-3 text-gray-300">
-                        <p><i class="fas fa-university text-primary w-6"></i> <span id="info-edu"></span></p>
-                        <p><i class="fas fa-envelope text-primary w-6"></i> <span id="info-email"></span></p>
-                        <p><i class="fas fa-phone text-primary w-6"></i> <span id="info-phone"></span></p>
-                        <p><i class="fas fa-map-marker-alt text-primary w-6"></i> <span id="info-location"></span></p>
-                    </div>
+                <h2 class="text-2xl font-bold font-heading mb-4">Civil Engineer • Developer • Tech Enthusiast</h2>
+                <p class="text-gray-400 text-sm md:text-base mb-8 max-w-lg leading-relaxed">
+                    I am an undergraduate Civil Engineering student at UAP, passionate about structural design, real estate development, and modern web technologies. I enjoy bridging the gap between physical infrastructure and digital solutions.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="bg-transparent border border-gray-600 text-white px-8 py-3 rounded-md font-medium hover:bg-gray-800 transition-all text-sm">Explore My Work</a>
+                    <a href="#" class="bg-white text-black px-8 py-3 rounded-md font-medium hover:bg-gray-200 transition-all text-sm">Download Resume</a>
                 </div>
-                <div class="md:w-1/2 w-full">
-                    <h3 class="text-2xl font-semibold mb-6 text-white text-center md:text-left">Professional Skills</h3>
-                    <div class="flex flex-wrap gap-3 justify-center md:justify-start" id="skills-container">
-                        <!-- Skills injected via JS -->
+            </div>
+            
+            <div class="md:w-[45%] flex justify-center md:justify-end reveal relative">
+                <!-- Profile Image Frame -->
+                <div class="relative w-72 md:w-96 rounded-[2rem] overflow-hidden border border-gray-800 p-2 bg-[#0c0a1f]">
+                    <div class="absolute top-4 left-4 z-10 text-center">
+                        <span class="block font-bold text-lg leading-none">UAP</span>
+                        <span class="text-[0.6rem] text-gray-400 uppercase tracking-wider">Civil Engineering</span>
+                    </div>
+                    <img src="https://drive.google.com/thumbnail?id=1i8QqoyqbHSYX1NBz9ZdF4kaUN8ZX_Ag8&sz=w800" alt="Md Sadik Hasan Shishir" class="w-full h-auto rounded-3xl object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500">
+                    
+                    <div class="absolute bottom-4 right-4 z-10 bg-black/60 backdrop-blur-md border border-gray-700 rounded-full px-4 py-2 flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-xs font-medium text-gray-200">Open to Opportunities</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 relative z-10">
+    <!-- About Section -->
+    <section id="about" class="py-24 relative z-10 border-t border-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-gradient">Projects</span></h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded-full text-center"></div>
-                <p class="mt-4 text-gray-400">Showcasing my recent works in Civil Engineering & Web Development</p>
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">About Me</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-16 reveal text-center max-w-3xl mx-auto">
+                Turning concepts into <span class="text-gradient">practical realities.</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 reveal">
+                <div class="glass-card p-8">
+                    <h3 class="text-xl font-bold mb-4">Who I Am</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        I am an undergraduate Civil Engineering student at the University of Asia Pacific (UAP), based in Bogura. I have a strong foundation in structural mechanics, AutoCAD, Revit, and advanced land surveying (RTK GPS).
+                    </p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        My goal is to become a versatile engineer who can design robust structures and develop reliable digital solutions for the real estate and construction industries.
+                    </p>
+                </div>
+                <div class="glass-card p-8">
+                    <h3 class="text-xl font-bold mb-4">What I Do</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Beyond traditional engineering, I actively engage in real estate marketing and land development (e.g., Paikar City, Brigadier Housing Complex). I also build professional web portals using WordPress and utilize Python for engineering analysis.
+                    </p>
+                </div>
+                <div class="glass-card p-8">
+                    <h3 class="text-xl font-bold mb-4">What I Enjoy</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        I enjoy learning new technologies, operating drones for aerial site mapping (DJI), exploring AI for development, and blending my technical engineering knowledge with modern web and software development tools.
+                    </p>
+                </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-container">
-                <!-- Projects injected via JS -->
+
+            <!-- Quick Stats/Tags -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 reveal">
+                <div class="glass-card p-6 text-center border-t border-t-primary/30">
+                    <div class="font-bold text-xl mb-1">UAP</div>
+                    <div class="text-xs text-gray-500 uppercase">Current Study</div>
+                </div>
+                <div class="glass-card p-6 text-center border-t border-t-secondary/30">
+                    <div class="font-bold text-xl mb-1">CE</div>
+                    <div class="text-xs text-gray-500 uppercase">Major</div>
+                </div>
+                <div class="glass-card p-6 text-center border-t border-t-primary/30">
+                    <div class="font-bold text-xl mb-1">Web Dev</div>
+                    <div class="text-xs text-gray-500 uppercase">Tech Focus</div>
+                </div>
+                <div class="glass-card p-6 text-center border-t border-t-secondary/30">
+                    <div class="font-bold text-xl mb-1">∞</div>
+                    <div class="text-xs text-gray-500 uppercase">Learning Mindset</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Certification Section -->
-    <section id="certificates" class="py-20 relative z-10 bg-dark/50">
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative z-10 border-t border-gray-900 bg-[#050314]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Licenses & <span class="text-gradient">Certifications</span></h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="certificates-container">
-                <!-- Certificates injected via JS -->
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">My Skills</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 reveal text-center max-w-3xl mx-auto">
+                Skills that help me <span class="text-gradient">build.</span>
+            </h2>
+            <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto reveal">
+                I am continuously improving my technical skills, bridging the gap between physical civil engineering and digital software development.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 reveal">
+                <!-- Engineering Design -->
+                <div class="glass-card p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="text-4xl font-bold text-gray-800">01</span>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Civil & Architectural Design</h3>
+                    <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Drafting site plans, 3D modeling, and structural layouts.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">AutoCAD 2D/3D</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Revit (BIM)</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">SketchUp</span>
+                    </div>
+                </div>
+
+                <!-- Surveying & Field -->
+                <div class="glass-card p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="text-4xl font-bold text-gray-800">02</span>
+                        <span class="badge">Field Work</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Surveying & Mapping</h3>
+                    <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Advanced land measurement and aerial site visualization.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">RTK GPS</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Total Station</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Drone Mapping (DJI)</span>
+                    </div>
+                </div>
+
+                <!-- Web Development -->
+                <div class="glass-card p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="text-4xl font-bold text-gray-800">03</span>
+                        <span class="badge">Web</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Web & Software Dev</h3>
+                    <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Building business portals, custom websites, and analytical tools.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">HTML/CSS</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Tailwind</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">WordPress</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Python (Django)</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Flutter</span>
+                    </div>
+                </div>
+
+                <!-- Media & Tools -->
+                <div class="glass-card p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="text-4xl font-bold text-gray-800">04</span>
+                        <span class="badge">Tools</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Media & Analysis Tools</h3>
+                    <p class="text-gray-400 text-sm mb-6 min-h-[40px]">Video editing, graphic design, and data management.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">DaVinci Resolve</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Adobe Illustrator</span>
+                        <span class="bg-gray-800/50 text-gray-300 text-xs px-3 py-1.5 rounded">Advanced MS Excel</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact & Map Section -->
-    <section id="contact" class="py-20 relative z-10">
+    <!-- Experience & Education (Timeline style) -->
+    <section id="experience" class="py-24 relative z-10 border-t border-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="text-gradient">Touch</span></h2>
-                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">Journey</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-16 reveal text-center">
+                My journey of <span class="text-gradient">learning & growth.</span>
+            </h2>
+
+            <!-- Experience Timeline -->
+            <div class="relative timeline-line mb-20">
+                
+                <!-- Item 1: Real Estate -->
+                <div class="relative z-10 flex flex-col md:flex-row justify-between md:items-center mb-12 reveal w-full md:w-1/2 md:pr-12 md:ml-auto">
+                    <!-- Point -->
+                    <div class="absolute left-6 md:left-0 md:-ml-2 top-0 mt-2 w-4 h-4 rounded-full bg-primary ring-4 ring-dark z-20 hidden md:block"></div>
+                    
+                    <div class="glass-card p-6 w-full ml-12 md:ml-0">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="badge bg-green-500/10 text-green-400 border-green-500/20">Current Focus</span>
+                            <span class="text-xs text-gray-500">2025 - Present</span>
+                        </div>
+                        <h3 class="text-lg font-bold">Real Estate Dev & Marketing</h3>
+                        <p class="text-sm text-gray-400 mb-2">Paikar City & Brigadier Housing Complex</p>
+                        <p class="text-sm text-gray-500">Managing project layouts, digital promotional assets, site mapping via drones, and technical marketing strategies in Bogura.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-[10px] uppercase tracking-wider text-gray-400 bg-gray-800 px-2 py-1 rounded">AutoCAD</span>
+                            <span class="text-[10px] uppercase tracking-wider text-gray-400 bg-gray-800 px-2 py-1 rounded">Marketing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Web Dev -->
+                <div class="relative z-10 flex flex-col md:flex-row justify-between md:items-center mb-12 reveal w-full md:w-1/2 md:pl-12">
+                    <!-- Point -->
+                    <div class="absolute left-6 md:right-0 md:left-auto md:-mr-2 top-0 mt-2 w-4 h-4 rounded-full bg-secondary ring-4 ring-dark z-20 hidden md:block"></div>
+                    
+                    <div class="glass-card p-6 w-full ml-12 md:ml-0">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="badge">Project Experience</span>
+                            <span class="text-xs text-gray-500">2026</span>
+                        </div>
+                        <h3 class="text-lg font-bold">Web Developer</h3>
+                        <p class="text-sm text-gray-400 mb-2">Guardian Housing & Builders</p>
+                        <p class="text-sm text-gray-500">Designed and deployed a complete business web portal using WordPress, managing hosting, domains, and custom front-end styling.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="text-[10px] uppercase tracking-wider text-gray-400 bg-gray-800 px-2 py-1 rounded">WordPress</span>
+                            <span class="text-[10px] uppercase tracking-wider text-gray-400 bg-gray-800 px-2 py-1 rounded">Web Design</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-col lg:flex-row gap-12 reveal">
+
+            <!-- Education Timeline -->
+            <div id="education" class="mt-24">
+                <h2 class="text-3xl font-bold font-heading mb-12 reveal text-center">My <span class="text-gradient">academic</span> journey.</h2>
+                
+                <div class="space-y-4 reveal max-w-4xl mx-auto">
+                    <!-- UAP -->
+                    <div class="glass-card p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-l-4 border-l-primary">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center font-bold text-gray-300">UAP</div>
+                            <div>
+                                <h3 class="font-bold text-lg">University of Asia Pacific</h3>
+                                <p class="text-sm text-gray-400">B.Sc. in Civil Engineering</p>
+                            </div>
+                        </div>
+                        <span class="badge bg-green-500/10 text-green-400 border-green-500/20">Current</span>
+                    </div>
+
+                    <!-- School -->
+                    <div class="glass-card p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-gray-800 flex items-center justify-center font-bold text-gray-300">BM</div>
+                            <div>
+                                <h3 class="font-bold text-lg">BIAM Model School and College, Bogura</h3>
+                                <p class="text-sm text-gray-400">Primary to Higher Secondary Education</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-gray-500 font-medium px-3 py-1 bg-gray-800 rounded-full">Completed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section (Gallery) -->
+    <section id="certificates" class="py-24 relative z-10 border-t border-gray-900 bg-[#050314]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">Certifications</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 reveal text-center">
+                Learning that <span class="text-gradient">counts.</span>
+            </h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto reveal">
+                A curated collection of certificates from professional learning programs in civil drafting, software development, cybersecurity, and AI.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                
+                <!-- Cert 1 -->
+                <div class="glass-card overflow-hidden cert-card group">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative">
+                        <img src="https://drive.google.com/thumbnail?id=1GQ7g4suxYJhsSAv1bMdwOK7lSKIN2Xci&sz=w800" alt="Civil 3D" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-primary mb-2">Autodesk Learning</span>
+                        <h3 class="font-bold text-lg mb-1 leading-tight">Civil 3D 2023 Essentials</h3>
+                        <p class="text-xs text-gray-400 mb-4 flex-1">Complete beginners guide to Civil 3D.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
+                            <span>ID: B499-8705</span>
+                            <span>Oct 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="glass-card overflow-hidden cert-card group">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative">
+                        <img src="https://drive.google.com/thumbnail?id=1WLet_RrliFL71CcDtVdPdTYfHguPVSNP&sz=w800" alt="Python & Django" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-secondary mb-2">Ostad The Coach</span>
+                        <h3 class="font-bold text-lg mb-1 leading-tight">AI-Powered Full Stack Dev</h3>
+                        <p class="text-xs text-gray-400 mb-4 flex-1">Development with Python & Django.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
+                            <span>ID: C48537</span>
+                            <span>2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="glass-card overflow-hidden cert-card group">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative">
+                        <img src="https://drive.google.com/thumbnail?id=16__Ks0vmnsH9NrB8PIcDYp6MM9mMVXZ2&sz=w800" alt="Cyber Security" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-green-400 mb-2">Ostad The Coach</span>
+                        <h3 class="font-bold text-lg mb-1 leading-tight">Cyber Security & Ethical Hacking</h3>
+                        <p class="text-xs text-gray-400 mb-4 flex-1">Career Starter crash course.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
+                            <span>ID: C48536</span>
+                            <span>2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="glass-card overflow-hidden cert-card group">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative">
+                        <img src="https://drive.google.com/thumbnail?id=1uqCfvJERJNU-LJoigywlDcqrVgVszGp-&sz=w800" alt="Flutter" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 mb-2">Ostad The Coach</span>
+                        <h3 class="font-bold text-lg mb-1 leading-tight">App Dev with Flutter</h3>
+                        <p class="text-xs text-gray-400 mb-4 flex-1">Career Launchpad 2026.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
+                            <span>ID: C48538</span>
+                            <span>2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 5 -->
+                <div class="glass-card overflow-hidden cert-card group">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative">
+                        <img src="https://drive.google.com/thumbnail?id=1a5DEiiIzAoPuWt7xlggrxUyDscqwPSdT&sz=w800" alt="OPSWAT CIP" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100 object-top">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-orange-400 mb-2">OPSWAT Academy</span>
+                        <h3 class="font-bold text-lg mb-1 leading-tight">Critical Infrastructure Protection</h3>
+                        <p class="text-xs text-gray-400 mb-4 flex-1">Introduction to CIP program.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
+                            <span>ID: ITDMW3KOAA</span>
+                            <span>Oct 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Cert 6 -->
+                 <div class="glass-card overflow-hidden cert-card group">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative flex items-center justify-center">
+                        <img src="https://drive.google.com/thumbnail?id=1lgDco88BcjUZ3HRa96Hzj0uYV9Tmk_4W&sz=w800" alt="AI Basics" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-red-400 mb-2">10 Minute School & Robi</span>
+                        <h3 class="font-bold text-lg mb-1 leading-tight">Basics of Artificial Intelligence</h3>
+                        <p class="text-xs text-gray-400 mb-4 flex-1">Comprehensive AI online course.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-3">
+                            <span>ID: 624a70c86</span>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-8 reveal">
+                <p class="text-xs text-gray-500">*Also hold certifications in Adobe Illustrator, Network AI, and Basics of Management.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 relative z-10 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">Projects</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-6 reveal text-center">
+                Things I've <span class="text-gradient">built.</span>
+            </h2>
+            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto reveal">
+                A collection of my academic, personal, and professional engineering/web development projects.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 reveal">
+                <!-- Project 1 -->
+                <div class="glass-card p-6 relative group">
+                    <div class="absolute top-6 right-6 badge bg-gray-800 text-gray-300 border-gray-700">Ongoing</div>
+                    <span class="text-5xl font-bold text-gray-800/50 absolute top-4 right-24 pointer-events-none">01</span>
+                    <h3 class="text-2xl font-bold mb-2">Brigadier Housing Complex</h3>
+                    <p class="text-sm text-gray-400 mb-6">Real estate layout planning, drone site mapping, and digital marketing strategy execution in Bogura.</p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">AutoCAD</span>
+                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">Drone Mapping</span>
+                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">Site Planning</span>
+                    </div>
+                    <a href="#" class="text-sm font-bold flex items-center gap-2 hover:text-primary transition-colors">
+                        View Project Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card p-6 relative group">
+                    <div class="absolute top-6 right-6 badge bg-green-500/10 text-green-400 border-green-500/20"><i class="fas fa-circle text-[8px] mr-1"></i> Live</div>
+                    <span class="text-5xl font-bold text-gray-800/50 absolute top-4 right-24 pointer-events-none">02</span>
+                    <h3 class="text-2xl font-bold mb-2">Guardian Housing Website</h3>
+                    <p class="text-sm text-gray-400 mb-6">A modern business portal developed for Guardian Housing & Builders, presenting residential development projects.</p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">WordPress</span>
+                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">CSS</span>
+                        <span class="text-xs font-medium px-2 py-1 bg-[#1a1736] rounded text-gray-300 border border-gray-700">Web Design</span>
+                    </div>
+                    <a href="#" class="text-sm font-bold flex items-center gap-2 hover:text-primary transition-colors">
+                        Visit Live Website <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative z-10 border-t border-gray-900 bg-[#050314]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-4 text-center text-xs tracking-widest text-primary uppercase font-bold reveal">Contact</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading mb-16 reveal text-center">
+                Let's <span class="text-gradient">connect.</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto reveal">
+                <!-- Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">Get in touch</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Have a project idea, a civil engineering consultation, or simply want to talk about technology? Feel free to get in touch with me.
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-primary shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Email</p>
+                                <a href="mailto:contact.shishir@gmail.com" class="text-sm font-medium hover:text-primary transition-colors">contact.shishir@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-primary shrink-0">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Phone</p>
+                                <a href="tel:+8801773215854" class="text-sm font-medium hover:text-primary transition-colors">+88 01773215854</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-primary shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Location</p>
+                                <p class="text-sm font-medium">Bogura, Bangladesh</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Form -->
-                <div class="lg:w-1/2 glass-card p-8">
-                    <form id="contact-form" class="space-y-6">
-                        <div>
-                            <label class="block text-gray-400 mb-2">Name</label>
-                            <input type="text" id="sender-name" required class="w-full bg-dark/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                <div class="glass-card p-8">
+                    <h3 class="text-xl font-bold mb-6">Send me a message</h3>
+                    <form id="contact-form" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">Your Name</label>
+                                <input type="text" required class="w-full bg-[#0c0a1f] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">Your Email</label>
+                                <input type="email" required class="w-full bg-[#0c0a1f] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm">
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-gray-400 mb-2">Email</label>
-                            <input type="email" id="sender-email" required class="w-full bg-dark/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                            <label class="block text-xs text-gray-500 mb-1">Subject</label>
+                            <input type="text" required class="w-full bg-[#0c0a1f] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm">
                         </div>
                         <div>
-                            <label class="block text-gray-400 mb-2">Message</label>
-                            <textarea id="sender-message" rows="4" required class="w-full bg-dark/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
+                            <label class="block text-xs text-gray-500 mb-1">Message</label>
+                            <textarea rows="4" required class="w-full bg-[#0c0a1f] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm resize-none"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-cyan-500 text-white font-medium py-3 rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all flex justify-center items-center gap-2">
-                            <span>Send Message</span>
-                            <i class="fas fa-paper-plane"></i>
+                        <button type="submit" class="w-full bg-primary hover:bg-indigo-600 text-white font-medium py-3 rounded-lg transition-colors text-sm mt-2">
+                            Send Message
                         </button>
-                        <p id="form-status" class="text-center text-sm mt-4 hidden"></p>
                     </form>
-                </div>
-                <!-- Map -->
-                <div class="lg:w-1/2 glass-card overflow-hidden h-[450px]">
-                    <iframe id="google-map" class="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-500" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="glass-nav py-6 border-t border-gray-800 text-center text-gray-400 text-sm">
-        <p>&copy; 2026 <span id="footer-name" class="text-primary"></span>. All Rights Reserved.</p>
+    <footer class="py-8 border-t border-gray-900 text-center text-gray-500 text-xs">
+        <div class="flex justify-center gap-4 mb-4">
+            <a href="#" class="hover:text-white transition-colors">Facebook</a>
+            <a href="#" class="hover:text-white transition-colors">GitHub</a>
+            <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+        </div>
+        <p>&copy; 2026 Md Sadik Hasan Shishir. Built with HTML, Tailwind & JS.</p>
     </footer>
 
-    <!-- ========================================== -->
-    <!-- DYNAMIC DATA MANAGEMENT & LOGIC (CRUCIAL)  -->
-    <!-- ========================================== -->
+    <!-- Scripts -->
     <script>
-        // Data Configuration Hub
-        const siteData = {
-            personal: {
-                name: "Md Sadik Hasan Shishir",
-                roles: ["Civil Engineer", "Web Developer", "Real Estate Specialist", "Drone Mapping Expert"],
-                shortDesc: "Bridging the gap between physical infrastructure and digital solutions through advanced Civil Engineering and Modern Web Development.",
-                aboutText: "I am an undergraduate Civil Engineering student at the University of Asia Pacific (UAP), currently based in Bogura. My expertise spans across structural mechanics, architectural drafting using AutoCAD & Revit, and advanced land surveying (Total Station, RTK GPS). Beyond traditional engineering, I have practical experience in real estate development with projects like Paikar City and Brigadier Housing Complex. I also specialize in building professional web portals using WordPress and utilizing Python for engineering numerical analysis.",
-                education: "B.Sc. in Civil Engineering, University of Asia Pacific (UAP)",
-                phone: "+88 01773215854",
-                email: "contact.shishir@gmail.com",
-                location: "Bogura, Bangladesh"
-            },
-            socials: [
-                { icon: "fab fa-facebook-f", url: "https://facebook.com/" },
-                { icon: "fab fa-github", url: "https://github.com/sadikhasanshishir" },
-                { icon: "fab fa-linkedin-in", url: "https://linkedin.com/" }
-            ],
-            skills: [
-                "AutoCAD 2D/3D", "Revit (BIM)", "Structural Mechanics", "Land Surveying (RTK GPS)", 
-                "Concrete Technology", "Python (Eng. Analysis)", "Drone Site Mapping (DJI)", 
-                "Real Estate Marketing", "WordPress & Web Dev", "HTML, CSS, JS, Tailwind"
-            ],
-            projects: [
-                {
-                    title: "Brigadier Housing Complex",
-                    category: "AutoCAD & Site Planning",
-                    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&h=1200&q=80",
-                    liveLink: "#",
-                    githubLink: "#"
-                },
-                {
-                    title: "Paikar City Real Estate",
-                    category: "Project Management & Marketing",
-                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=1200&q=80",
-                    liveLink: "#",
-                    githubLink: "#"
-                },
-                {
-                    title: "Guardian Housing Portal",
-                    category: "WordPress Development",
-                    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&h=1200&q=80",
-                    liveLink: "#",
-                    githubLink: "#"
-                }
-            ],
-            certificates: [
-                {
-                    title: "AutoCAD & Drafting Masterclass",
-                    issuer: "Autodesk Education",
-                    year: "2025",
-                    icon: "fas fa-drafting-compass",
-                    link: "#"
-                },
-                {
-                    title: "Construction Project Management",
-                    issuer: "Coursera",
-                    year: "2026",
-                    icon: "fas fa-hard-hat",
-                    link: "#"
-                },
-                {
-                    title: "Modern Web Development",
-                    issuer: "freeCodeCamp",
-                    year: "2026",
-                    icon: "fas fa-code",
-                    link: "#"
-                },
-                {
-                    title: "Python for Engineering Analysis",
-                    issuer: "Udemy",
-                    year: "2026",
-                    icon: "fab fa-python",
-                    link: "#"
-                }
-            ],
-            mapEmbedLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115984.77334707767!2d89.28859942701198!3d24.848074900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fc54e7e81df441%3A0x27133ed921fea73d!2sBogra!5e0!3m2!1sen!2sbd!4v1711200000000!5m2!1sen!2sbd",
-            
-            telegramBotToken: "YOUR_BOT_TOKEN_HERE",
-            telegramChatId: "YOUR_CHAT_ID_HERE"
-        };
-
-        // DOM Manipulation & Rendering
         document.addEventListener("DOMContentLoaded", () => {
-            
-            // Personal Info
-            document.getElementById('hero-name').innerText = siteData.personal.name;
-            document.getElementById('hero-desc').innerText = siteData.personal.shortDesc;
-            document.getElementById('about-text').innerText = siteData.personal.aboutText;
-            document.getElementById('info-edu').innerText = siteData.personal.education;
-            document.getElementById('info-email').innerText = siteData.personal.email;
-            document.getElementById('info-phone').innerText = siteData.personal.phone;
-            document.getElementById('info-location').innerText = siteData.personal.location;
-            document.getElementById('footer-name').innerText = siteData.personal.name;
-            document.getElementById('google-map').src = siteData.mapEmbedLink;
-
-            // Social Links
-            const socialContainer = document.getElementById('social-links');
-            siteData.socials.forEach(social => {
-                socialContainer.innerHTML += `<a href="${social.url}" target="_blank" class="text-gray-400 hover:text-primary hover:-translate-y-1 transition-all"><i class="${social.icon}"></i></a>`;
+            // Mobile Menu Toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
             });
-
-            // Skills
-            const skillsContainer = document.getElementById('skills-container');
-            siteData.skills.forEach(skill => {
-                skillsContainer.innerHTML += `<span class="px-4 py-2 glass-card text-primary text-sm font-medium hover:bg-primary/20 cursor-default">${skill}</span>`;
-            });
-
-            // Portfolio Projects
-            const portfolioContainer = document.getElementById('portfolio-container');
-            siteData.projects.forEach(project => {
-                portfolioContainer.innerHTML += `
-                    <div class="glass-card overflow-hidden group reveal">
-                        <div class="project-img-wrapper bg-gray-800">
-                            <img src="${project.image}" alt="${project.title}" class="project-img">
-                        </div>
-                        <div class="p-6">
-                            <span class="text-primary text-xs font-semibold uppercase tracking-wider">${project.category}</span>
-                            <h3 class="text-xl font-bold mt-2 mb-4">${project.title}</h3>
-                            <div class="flex space-x-4">
-                                <a href="${project.liveLink}" class="flex-1 text-center bg-primary/20 text-primary py-2 rounded border border-primary/30 hover:bg-primary hover:text-white transition-colors text-sm">Live Preview</a>
-                                <a href="${project.githubLink}" class="flex-1 text-center bg-gray-800 text-white py-2 rounded border border-gray-700 hover:bg-gray-700 transition-colors text-sm"><i class="fab fa-github mr-1"></i> Details</a>
-                            </div>
-                        </div>
-                    </div>`;
-            });
-
-            // Certificates
-            const certContainer = document.getElementById('certificates-container');
-            siteData.certificates.forEach(cert => {
-                certContainer.innerHTML += `
-                    <div class="glass-card p-6 flex items-center gap-6 reveal">
-                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 shrink-0">
-                            <i class="${cert.icon} text-3xl text-primary"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-white mb-1">${cert.title}</h3>
-                            <p class="text-gray-400 text-sm mb-3">${cert.issuer} • <span class="text-primary">${cert.year}</span></p>
-                            <a href="${cert.link}" target="_blank" class="text-sm font-medium text-cyan-400 hover:text-white hover:underline transition-all">View Credential <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
-                        </div>
-                    </div>`;
-            });
-
-            // Typing Effect Logic
-            let roleIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            const typeText = document.getElementById('typing-text');
-            
-            function type() {
-                const currentRole = siteData.personal.roles[roleIndex];
-                if (isDeleting) {
-                    typeText.innerText = currentRole.substring(0, charIndex - 1);
-                    charIndex--;
-                } else {
-                    typeText.innerText = currentRole.substring(0, charIndex + 1);
-                    charIndex++;
-                }
-
-                let typeSpeed = isDeleting ? 50 : 100;
-
-                if (!isDeleting && charIndex === currentRole.length) {
-                    typeSpeed = 2000;
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    roleIndex = (roleIndex + 1) % siteData.personal.roles.length;
-                    typeSpeed = 500;
-                }
-                setTimeout(type, typeSpeed);
-            }
-            setTimeout(type, 1000);
 
             // Scroll Reveal Animation
             const reveals = document.querySelectorAll('.reveal');
@@ -401,58 +656,12 @@
                 });
             }, { threshold: 0.1 });
             reveals.forEach(reveal => observer.observe(reveal));
-
-            // Mobile Menu Toggle
-            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.toggle('hidden');
-            });
-
-            // Contact Form Submit Handling
-            document.getElementById('contact-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('sender-name').value;
-                const email = document.getElementById('sender-email').value;
-                const msg = document.getElementById('sender-message').value;
-                const status = document.getElementById('form-status');
-                const btn = this.querySelector('button[type="submit"]');
-
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                status.classList.remove('hidden', 'text-green-400', 'text-red-400');
-                status.classList.add('text-gray-400');
-                status.innerText = 'Please wait...';
-
-                const text = `🌟 New Message from Portfolio\n\nName: ${name}\nEmail: ${email}\nMessage: ${msg}`;
-                
-                if(siteData.telegramBotToken !== "YOUR_BOT_TOKEN_HERE") {
-                    fetch(`https://api.telegram.org/bot${siteData.telegramBotToken}/sendMessage`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ chat_id: siteData.telegramChatId, text: text })
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if(data.ok) showSuccess();
-                        else showError();
-                    })
-                    .catch(() => showError());
-                } else {
-                    setTimeout(showSuccess, 1500);
-                }
-
-                function showSuccess() {
-                    status.innerText = "✅ Message sent successfully!";
-                    status.classList.replace('text-gray-400', 'text-green-400');
-                    btn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane"></i>';
-                    document.getElementById('contact-form').reset();
-                    setTimeout(() => status.classList.add('hidden'), 5000);
-                }
-
-                function showError() {
-                    status.innerText = "❌ Failed to send message.";
-                    status.classList.replace('text-gray-400', 'text-red-400');
-                    btn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane"></i>';
-                }
-            });
+            
+            // Trigger first reveal immediately
+            setTimeout(() => {
+                document.querySelector('#home .reveal').classList.add('active');
+                if(document.querySelector('#home .floating')) document.querySelector('#home .floating').classList.add('active');
+            }, 100);
         });
     </script>
 </body>
