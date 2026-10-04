@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Md Sadik Hasan Shishir</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#3a86ff', dark: '#0f172a', glass: 'rgba(255, 255, 255, 0.05)' },
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+        
+        /* Glassmorphism Classes */
+        .glass-nav { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; }
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(58, 134, 255, 0.4); box-shadow: 0 10px 40px rgba(58, 134, 255, 0.15); }
+        
+        /* Gradient Text */
+        .text-gradient { background: linear-gradient(to right, #3a86ff, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Project Image Scroll Effect */
+        .project-img-wrapper { height: 250px; overflow: hidden; position: relative; border-radius: 16px 16px 0 0; }
+        .project-img { width: 100%; transition: transform 3s ease-in-out; }
+        .glass-card:hover .project-img { transform: translateY(calc(-100% + 250px)); }
+        
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        .floating { animation: float 4s ease-in-out infinite; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #3a86ff; border-radius: 4px; }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="text-2xl font-bold text-gradient">Shishir.</a>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 text-sm font-medium">
+                        <a href="#home" class="hover:text-primary transition-colors">Home</a>
+                        <a href="#about" class="hover:text-primary transition-colors">About</a>
+                        <a href="#portfolio" class="hover:text-primary transition-colors">Projects</a>
+                        <a href="#certificates" class="hover:text-primary transition-colors">Certificates</a>
+                        <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-nav absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#home" class="block px-3 py-2 hover:text-primary">Home</a>
+                <a href="#about" class="block px-3 py-2 hover:text-primary">About</a>
+                <a href="#portfolio" class="block px-3 py-2 hover:text-primary">Projects</a>
+                <a href="#certificates" class="block px-3 py-2 hover:text-primary">Certificates</a>
+                <a href="#contact" class="block px-3 py-2 hover:text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+            <div class="absolute top-1/3 right-1/4 w-72 h-72 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 text-center md:text-left reveal">
+                <p class="text-primary font-medium text-lg mb-2">Hello, I am</p>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4" id="hero-name"></h1>
+                <h2 class="text-2xl md:text-3xl text-gray-400 mb-6 h-10"><span id="typing-text" class="text-gradient font-semibold"></span><span class="animate-pulse">|</span></h2>
+                <p class="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0" id="hero-desc"></p>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#contact" class="bg-gradient-to-r from-primary to-cyan-500 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg hover:shadow-primary/30 transition-all transform hover:-translate-y-1">Hire Me</a>
+                    <a href="#" class="border border-primary/50 text-white px-8 py-3 rounded-full font-medium hover:bg-primary/10 transition-all">Download CV</a>
+                </div>
+                <div class="mt-8 flex justify-center md:justify-start space-x-6 text-xl" id="social-links">
+                    <!-- Social Links injected via JS -->
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center reveal floating">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full p-2 bg-gradient-to-tr from-primary to-cyan-400">
+                    <img id="profile-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Profile" class="w-full h-full object-cover rounded-full border-4 border-dark">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Skills Section -->
+    <section id="about" class="py-20 relative z-10 bg-dark/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="text-gradient">Me</span></h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="flex flex-col md:flex-row gap-12 items-center reveal">
+                <div class="md:w-1/2 glass-card p-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Introduction</h3>
+                    <p class="text-gray-400 leading-relaxed mb-4" id="about-text"></p>
+                    <div class="mt-6 space-y-3 text-gray-300">
+                        <p><i class="fas fa-university text-primary w-6"></i> <span id="info-edu"></span></p>
+                        <p><i class="fas fa-envelope text-primary w-6"></i> <span id="info-email"></span></p>
+                        <p><i class="fas fa-phone text-primary w-6"></i> <span id="info-phone"></span></p>
+                        <p><i class="fas fa-map-marker-alt text-primary w-6"></i> <span id="info-location"></span></p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 w-full">
+                    <h3 class="text-2xl font-semibold mb-6 text-white text-center md:text-left">Professional Skills</h3>
+                    <div class="flex flex-wrap gap-3 justify-center md:justify-start" id="skills-container">
+                        <!-- Skills injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-gradient">Projects</span></h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full text-center"></div>
+                <p class="mt-4 text-gray-400">Showcasing my recent works in Civil Engineering & Web Development</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-container">
+                <!-- Projects injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Certification Section -->
+    <section id="certificates" class="py-20 relative z-10 bg-dark/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Licenses & <span class="text-gradient">Certifications</span></h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="certificates-container">
+                <!-- Certificates injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section id="contact" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="text-gradient">Touch</span></h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-12 reveal">
+                <!-- Form -->
+                <div class="lg:w-1/2 glass-card p-8">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-gray-400 mb-2">Name</label>
+                            <input type="text" id="sender-name" required class="w-full bg-dark/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-2">Email</label>
+                            <input type="email" id="sender-email" required class="w-full bg-dark/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-2">Message</label>
+                            <textarea id="sender-message" rows="4" required class="w-full bg-dark/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-cyan-500 text-white font-medium py-3 rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all flex justify-center items-center gap-2">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <p id="form-status" class="text-center text-sm mt-4 hidden"></p>
+                    </form>
+                </div>
+                <!-- Map -->
+                <div class="lg:w-1/2 glass-card overflow-hidden h-[450px]">
+                    <iframe id="google-map" class="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-500" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-nav py-6 border-t border-gray-800 text-center text-gray-400 text-sm">
+        <p>&copy; 2026 <span id="footer-name" class="text-primary"></span>. All Rights Reserved.</p>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- DYNAMIC DATA MANAGEMENT & LOGIC (CRUCIAL)  -->
+    <!-- ========================================== -->
+    <script>
+        // Data Configuration Hub
+        const siteData = {
+            personal: {
+                name: "Md Sadik Hasan Shishir",
+                roles: ["Civil Engineer", "Web Developer", "Real Estate Specialist", "Drone Mapping Expert"],
+                shortDesc: "Bridging the gap between physical infrastructure and digital solutions through advanced Civil Engineering and Modern Web Development.",
+                aboutText: "I am an undergraduate Civil Engineering student at the University of Asia Pacific (UAP), currently based in Bogura. My expertise spans across structural mechanics, architectural drafting using AutoCAD & Revit, and advanced land surveying (Total Station, RTK GPS). Beyond traditional engineering, I have practical experience in real estate development with projects like Paikar City and Brigadier Housing Complex. I also specialize in building professional web portals using WordPress and utilizing Python for engineering numerical analysis.",
+                education: "B.Sc. in Civil Engineering, University of Asia Pacific (UAP)",
+                phone: "+88 01773215854",
+                email: "contact.shishir@gmail.com",
+                location: "Bogura, Bangladesh"
+            },
+            socials: [
+                { icon: "fab fa-facebook-f", url: "https://facebook.com/" },
+                { icon: "fab fa-github", url: "https://github.com/sadikhasanshishir" },
+                { icon: "fab fa-linkedin-in", url: "https://linkedin.com/" }
+            ],
+            skills: [
+                "AutoCAD 2D/3D", "Revit (BIM)", "Structural Mechanics", "Land Surveying (RTK GPS)", 
+                "Concrete Technology", "Python (Eng. Analysis)", "Drone Site Mapping (DJI)", 
+                "Real Estate Marketing", "WordPress & Web Dev", "HTML, CSS, JS, Tailwind"
+            ],
+            projects: [
+                {
+                    title: "Brigadier Housing Complex",
+                    category: "AutoCAD & Site Planning",
+                    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&h=1200&q=80",
+                    liveLink: "#",
+                    githubLink: "#"
+                },
+                {
+                    title: "Paikar City Real Estate",
+                    category: "Project Management & Marketing",
+                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=1200&q=80",
+                    liveLink: "#",
+                    githubLink: "#"
+                },
+                {
+                    title: "Guardian Housing Portal",
+                    category: "WordPress Development",
+                    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&h=1200&q=80",
+                    liveLink: "#",
+                    githubLink: "#"
+                }
+            ],
+            certificates: [
+                {
+                    title: "AutoCAD & Drafting Masterclass",
+                    issuer: "Autodesk Education",
+                    year: "2025",
+                    icon: "fas fa-drafting-compass",
+                    link: "#"
+                },
+                {
+                    title: "Construction Project Management",
+                    issuer: "Coursera",
+                    year: "2026",
+                    icon: "fas fa-hard-hat",
+                    link: "#"
+                },
+                {
+                    title: "Modern Web Development",
+                    issuer: "freeCodeCamp",
+                    year: "2026",
+                    icon: "fas fa-code",
+                    link: "#"
+                },
+                {
+                    title: "Python for Engineering Analysis",
+                    issuer: "Udemy",
+                    year: "2026",
+                    icon: "fab fa-python",
+                    link: "#"
+                }
+            ],
+            mapEmbedLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115984.77334707767!2d89.28859942701198!3d24.848074900000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fc54e7e81df441%3A0x27133ed921fea73d!2sBogra!5e0!3m2!1sen!2sbd!4v1711200000000!5m2!1sen!2sbd",
+            
+            telegramBotToken: "YOUR_BOT_TOKEN_HERE",
+            telegramChatId: "YOUR_CHAT_ID_HERE"
+        };
+
+        // DOM Manipulation & Rendering
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // Personal Info
+            document.getElementById('hero-name').innerText = siteData.personal.name;
+            document.getElementById('hero-desc').innerText = siteData.personal.shortDesc;
+            document.getElementById('about-text').innerText = siteData.personal.aboutText;
+            document.getElementById('info-edu').innerText = siteData.personal.education;
+            document.getElementById('info-email').innerText = siteData.personal.email;
+            document.getElementById('info-phone').innerText = siteData.personal.phone;
+            document.getElementById('info-location').innerText = siteData.personal.location;
+            document.getElementById('footer-name').innerText = siteData.personal.name;
+            document.getElementById('google-map').src = siteData.mapEmbedLink;
+
+            // Social Links
+            const socialContainer = document.getElementById('social-links');
+            siteData.socials.forEach(social => {
+                socialContainer.innerHTML += `<a href="${social.url}" target="_blank" class="text-gray-400 hover:text-primary hover:-translate-y-1 transition-all"><i class="${social.icon}"></i></a>`;
+            });
+
+            // Skills
+            const skillsContainer = document.getElementById('skills-container');
+            siteData.skills.forEach(skill => {
+                skillsContainer.innerHTML += `<span class="px-4 py-2 glass-card text-primary text-sm font-medium hover:bg-primary/20 cursor-default">${skill}</span>`;
+            });
+
+            // Portfolio Projects
+            const portfolioContainer = document.getElementById('portfolio-container');
+            siteData.projects.forEach(project => {
+                portfolioContainer.innerHTML += `
+                    <div class="glass-card overflow-hidden group reveal">
+                        <div class="project-img-wrapper bg-gray-800">
+                            <img src="${project.image}" alt="${project.title}" class="project-img">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-primary text-xs font-semibold uppercase tracking-wider">${project.category}</span>
+                            <h3 class="text-xl font-bold mt-2 mb-4">${project.title}</h3>
+                            <div class="flex space-x-4">
+                                <a href="${project.liveLink}" class="flex-1 text-center bg-primary/20 text-primary py-2 rounded border border-primary/30 hover:bg-primary hover:text-white transition-colors text-sm">Live Preview</a>
+                                <a href="${project.githubLink}" class="flex-1 text-center bg-gray-800 text-white py-2 rounded border border-gray-700 hover:bg-gray-700 transition-colors text-sm"><i class="fab fa-github mr-1"></i> Details</a>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            // Certificates
+            const certContainer = document.getElementById('certificates-container');
+            siteData.certificates.forEach(cert => {
+                certContainer.innerHTML += `
+                    <div class="glass-card p-6 flex items-center gap-6 reveal">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 shrink-0">
+                            <i class="${cert.icon} text-3xl text-primary"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white mb-1">${cert.title}</h3>
+                            <p class="text-gray-400 text-sm mb-3">${cert.issuer} • <span class="text-primary">${cert.year}</span></p>
+                            <a href="${cert.link}" target="_blank" class="text-sm font-medium text-cyan-400 hover:text-white hover:underline transition-all">View Credential <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                    </div>`;
+            });
+
+            // Typing Effect Logic
+            let roleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            const typeText = document.getElementById('typing-text');
+            
+            function type() {
+                const currentRole = siteData.personal.roles[roleIndex];
+                if (isDeleting) {
+                    typeText.innerText = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typeText.innerText = currentRole.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let typeSpeed = isDeleting ? 50 : 100;
+
+                if (!isDeleting && charIndex === currentRole.length) {
+                    typeSpeed = 2000;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % siteData.personal.roles.length;
+                    typeSpeed = 500;
+                }
+                setTimeout(type, typeSpeed);
+            }
+            setTimeout(type, 1000);
+
+            // Scroll Reveal Animation
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            reveals.forEach(reveal => observer.observe(reveal));
+
+            // Mobile Menu Toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+
+            // Contact Form Submit Handling
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('sender-name').value;
+                const email = document.getElementById('sender-email').value;
+                const msg = document.getElementById('sender-message').value;
+                const status = document.getElementById('form-status');
+                const btn = this.querySelector('button[type="submit"]');
+
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                status.classList.remove('hidden', 'text-green-400', 'text-red-400');
+                status.classList.add('text-gray-400');
+                status.innerText = 'Please wait...';
+
+                const text = `🌟 New Message from Portfolio\n\nName: ${name}\nEmail: ${email}\nMessage: ${msg}`;
+                
+                if(siteData.telegramBotToken !== "YOUR_BOT_TOKEN_HERE") {
+                    fetch(`https://api.telegram.org/bot${siteData.telegramBotToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: siteData.telegramChatId, text: text })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.ok) showSuccess();
+                        else showError();
+                    })
+                    .catch(() => showError());
+                } else {
+                    setTimeout(showSuccess, 1500);
+                }
+
+                function showSuccess() {
+                    status.innerText = "✅ Message sent successfully!";
+                    status.classList.replace('text-gray-400', 'text-green-400');
+                    btn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane"></i>';
+                    document.getElementById('contact-form').reset();
+                    setTimeout(() => status.classList.add('hidden'), 5000);
+                }
+
+                function showError() {
+                    status.innerText = "❌ Failed to send message.";
+                    status.classList.replace('text-gray-400', 'text-red-400');
+                    btn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
